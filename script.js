@@ -12,6 +12,7 @@ const questions = [
     'What’s your biggest red flag? 🚩',
     'Finally… what’s your honest opinion about me? 😳'
 ];
+//You can add more questions and edit them here
 let currentQuestion = 0;
 let userName = '';
 let userResponses = [];
@@ -50,6 +51,7 @@ function nextQuestion() {
 }
 
 function getOptions(question) {
+    // Edit, Add or Remove questions, answers and their responses here...
     const options = {
         'How long does it take you to reply to texts? 📱': [
             ['🏎️ Instantly — I live in my chat app', 'Ahhh!! That’s not true! 🫣'],
@@ -123,6 +125,7 @@ function handleClick(event, response, answer) {
     showResponse(response);
 }
 
+//Quiz Starting Logic
 function startQuiz(isReady) {
     userName = document.getElementById('name-input').value;
     if (isReady) {
@@ -144,7 +147,7 @@ function showLastChance() {
 }
 
 // function saveResponsesToGoogleSheets(userName, userResponses) {
-//     fetch('https://script.google.com/macros/s/AKfycbyV77Ub1M_ZvDvdKJzdG1jywALk01MpKk_7G12HWYfvshMStVyu5FbT9tC9PetSJLLm/exec', {
+//     fetch('Google_Sheet_Script_URL', {
 //         method: 'POST',
 //         headers: {
 //             'Content-Type': 'application/json'
