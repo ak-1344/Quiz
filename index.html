@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roast & Toast Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #home-container,
+        #quiz-container,
+        #result {
+            display: none;
+        }
+
+        #home-container.active,
+        #quiz-container.active,
+        #result.active {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body class="flex items-center justify-center min-h-screen bg-gradient-to-r from-green-400 to-blue-500 text-white">
+
+
+    <!-- The Home Screen -->
+    <div id="home-container" class="active flex flex-col items-center justify-center h-screen w-full">
+        <h1 class="text-4xl font-bold mb-4">Welcome $User, What should we do today?</h1>
+        <p class="text-2xl mb-4">So, Who are you?!</p>
+        <input type="text" id="name-input"
+            class="input-field w-1/2 bg-white bg-opacity-20 border-none rounded-xl p-3 mb-4 text-white text-xl placeholder-white placeholder-opacity-60"
+            placeholder="Tell me your name" required>
+        <!-- Question of acceptance -->
+        <p class="text-2xl mb-4">Answer some questions for me?!</p>
+        <div class="flex space-x-4"></div>
+        <button
+            class="button w-1/2 bg-white bg-opacity-20 border-none rounded-xl p-3 mb-4 text-white text-xl hover:bg-opacity-40"
+            type="submit" onclick="startQuiz(true)">Ofcourse</button>
+        <button
+            class="button w-1/2 bg-white bg-opacity-20 border-none rounded-xl p-3 mb-4 text-white text-xl hover:bg-opacity-40"
+            type="submit" onclick="startQuiz(false)">Nope, I am a busy person!!</button>
+    </div>
+    </div>
+    <div id="second-chance" class="hidden flex flex-col items-center justify-center h-screen w-full space-y-2">
+        <p class="text-2xl mb-4">Please please please?</p>
+        <div class="flex space-x-4">
+            <button
+                class="button w-1/2 bg-white bg-opacity-20 border-none rounded-xl p-3 mb-4 text-white text-xl hover:bg-opacity-40"
+                onclick="startQuiz(true)">Okayy</button>
+            <button
+                class="button w-1/2 bg-white bg-opacity-20 border-none rounded-xl p-3 mb-4 text-white text-xl hover:bg-opacity-40"
+                onclick="showLastChance()">I said no right?!</button>
+        </div>
+    </div>
+    <div id="last-chance" class="hidden flex flex-col items-center justify-center h-screen w-full space-y-2">
+        <p class="text-2xl mb-4">Give a chance atleast?</p>
+        <div class="flex space-x-4">
+            <button
+                class="button w-1/2 bg-white bg-opacity-20 border-none rounded-xl p-3 mb-4 text-white text-xl hover:bg-opacity-40"
+                onclick="startQuiz(true)">Urgghhh,Okayy</button>
+            <button
+                class="button w-1/2 bg-white bg-opacity-20 border-none rounded-xl p-3 mb-4 text-white text-xl hover:bg-opacity-40"
+                onclick="startQuiz(true)">Okay, Let's See what have you got!</button>
+        </div>
+    </div>
+
+
+
+
+    <!-- Quiz Questions -->
+    <div id="quiz-container" class="flex flex-col items-center justify-center h-screen w-full text-center">
+        <h1 id="quiz-title"
+            class="text-4xl font-bold mb-4 fixed top-0 left-0 w-full text-center bg-opacity-50 bg-black py-4">🔥 😏👺 🔥
+        </h1>
+        <div id="question" class="text-2xl font-medium mb-4">How long does it take you to reply to texts? 📱</div>
+        <div id="answers" class="space-y-4">
+            <button
+                class="button w-1/2 bg-white bg-opacity-20 border-none rounded-xl p-3 mb-2 text-white text-xl hover:bg-opacity-40 transition duration-300 ease-in-out transform hover:scale-105"
+                onclick="handleClick(event, 'Reply? I thought ignoring people was my love language.')">🐢 Reply? I
+                thought ignoring people was my love language</button>
+            <button
+                class="button w-1/2 bg-white bg-opacity-20 border-none rounded-xl p-3 mb-2 text-white text-xl hover:bg-opacity-40 transition duration-300 ease-in-out transform hover:scale-105"
+                onclick="handleClick(event, 'I wait just long enough to seem important.')">⏳ I wait just long enough to
+                seem important</button>
+            <button
+                class="button w-1/2 bg-white bg-opacity-20 border-none rounded-xl p-3 mb-2 text-white text-xl hover:bg-opacity-40 transition duration-300 ease-in-out transform hover:scale-105"
+                onclick="handleClick(event, 'Fast — because I clearly have nothing better to do.')">🏃‍♀️ Fast — because
+                I clearly have nothing better to do</button>
+            <button
+                class="button w-1/2 bg-white bg-opacity-20 border-none rounded-xl p-3 mb-2 text-white text-xl hover:bg-opacity-40 transition duration-300 ease-in-out transform hover:scale-105"
+                onclick="handleClick(event, 'Texts? I communicate through vibes.')">📵 Texts? I communicate through
+                vibes</button>
+        </div>
+        <div id="response"
+            class="hidden text-purple-500 font-bold mt-6 bg-yellow-200 bg-opacity-80 p-6 rounded-2xl shadow-2xl transition duration-300 ease-in-out transform hover:scale-110 text-lg lg:text-2xl lg:fixed lg:bottom-8 lg:right-120">
+        </div>
+        <button id="next-btn"
+            class="hidden bg-green-500 hover:bg-green-700 rounded-xl py-4 px-8 mt-8 text-xl lg:absolute lg:bottom-4 lg:right-4 lg:w-auto w-full"
+            onclick="nextQuestion()">Next</button>
+    </div>
+    <!-- End of the quiz -->
+    <div id="result" class="flex flex-col items-center justify-center h-screen w-full bg-gradient-to-r from-purple-400 to-pink-500 text-white p-8 rounded-xl shadow-2xl">
+    </div>
+
+
+
+
+
+
+    <script src="script.js">
+        
+    </script>
+</body>
+
+</html>
