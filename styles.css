@@ -1,0 +1,11 @@
+#home-container,
+#quiz-container,
+#result {
+    display: none;
+}
+
+#home-container.active,
+#quiz-container.active,
+#result.active {
+    display: flex;
+}
